@@ -1,4 +1,4 @@
 package com.example.joboffers.domain.loginandregister;
 
-public class LogiAndRegisterFacade {
+public class LoginAndRegisterFacade {
 }
