@@ -18,6 +18,6 @@ public interface OfferRepository {
 
     boolean existsById(String id);
 
-    boolean existsByOfferUrl(String id);
+    boolean existsByOfferUrl(String url);
 
 }
