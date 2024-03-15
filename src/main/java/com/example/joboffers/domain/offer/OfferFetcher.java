@@ -17,7 +17,7 @@ public class OfferFetcher {
         try{
             return offerRepository.saveAllOffers(offersAfterFiltering);
         }catch (DuplicateOfferException duplicateOfferException){
-            throw new OfferSavingException(duplicateOfferException.getMessage());
+            throw new OfferSavingException(duplicateOfferException.getMessage(), offers);
         }
 
 
