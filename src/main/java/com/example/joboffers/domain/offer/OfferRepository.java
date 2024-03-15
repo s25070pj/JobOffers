@@ -2,8 +2,6 @@ package com.example.joboffers.domain.offer;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
 public interface OfferRepository {
 
     Offer saveOffer(Offer offer);
