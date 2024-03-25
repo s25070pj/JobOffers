@@ -15,7 +15,7 @@ class LoginAndRegisterFacadeTest {
     );
 
     @Test
-    public void should_register_user(){
+    public void should_register_user() {
         //given
         UserRegisterDto userRegisterDto = new UserRegisterDto("adi", "123");
 
@@ -29,7 +29,7 @@ class LoginAndRegisterFacadeTest {
     }
 
     @Test
-    public void should_find_user_by_username(){
+    public void should_find_user_by_username() {
         //given
         UserRegisterDto userRegisterDto = new UserRegisterDto("adi", "123");
         RegisterResultDto register = loginAndRegisterFacade.register(userRegisterDto);
@@ -40,7 +40,7 @@ class LoginAndRegisterFacadeTest {
     }
 
     @Test
-    public void should_throw_exception_when_user_not_found(){
+    public void should_throw_exception_when_user_not_found() {
         //given
         String username = "adi";
         //when
