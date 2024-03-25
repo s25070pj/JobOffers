@@ -1,6 +1,5 @@
 package com.example.joboffers.domain.offer;
 
-
 import com.example.joboffers.domain.offer.dto.OfferRequestDto;
 import com.example.joboffers.domain.offer.dto.OfferResponseDto;
 import lombok.AllArgsConstructor;
@@ -12,36 +11,31 @@ import java.util.stream.Collectors;
 public class OfferFacade {
 
     private final OfferRepository offerRepository;
-    private final OfferFetcher offerFetcher;
+    private final OfferService offerService;
 
-    public OfferResponseDto saveOffer(OfferRequestDto offerRequestDto) {
-        Offer offer = OfferMapper.mapOfferDtoToOffer(offerRequestDto);
-        OfferResponseDto offerResponseDto = OfferMapper.mapOfferToOfferDto(offer);
-        offerRepository.saveOffer(offer);
-        return offerResponseDto;
+    public List<OfferResponseDto> findAllOffers() {
+        return offerRepository.findAll()
+                .stream()
+                .map(OfferMapper::mapFromOfferToOfferDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<OfferResponseDto> fetchAllOffersAndSaveAllIfNotExists() {
+        return offerService.fetchAllOffersAndSaveAllIfNotExists()
+                .stream()
+                .map(OfferMapper::mapFromOfferToOfferDto)
+                .toList();
     }
 
     public OfferResponseDto findOfferById(String id) {
-
-        return offerRepository.findOfferById(id)
-                .map(OfferMapper::mapOfferToOfferDto)
+        return offerRepository.findById(id)
+                .map(OfferMapper::mapFromOfferToOfferDto)
                 .orElseThrow(() -> new OfferNotFoundException(id));
     }
 
-    public List<OfferResponseDto> findAllOffers() {
-
-        return offerRepository.findAllOffers()
-                .stream()
-                .map(OfferMapper::mapOfferToOfferDto)
-                .collect(Collectors.toList());
+    public OfferResponseDto saveOffer(OfferRequestDto offerDto) {
+        final Offer offer = OfferMapper.mapFromOfferDtoToOffer(offerDto);
+        final Offer save = offerRepository.save(offer);
+        return OfferMapper.mapFromOfferToOfferDto(save);
     }
-
-    public List<OfferResponseDto> fetchAllOffersAndSaveAllIfNotExistsInBase() {
-        List<Offer> offers = offerFetcher.fetchAllOffersAndSaveAllIfNotExistsInBase();
-        return offers.stream()
-                .map(OfferMapper::mapOfferToOfferDto)
-                .collect(Collectors.toList());
-    }
-
-
 }

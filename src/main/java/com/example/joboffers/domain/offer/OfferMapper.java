@@ -1,34 +1,38 @@
 package com.example.joboffers.domain.offer;
 
-import com.example.joboffers.domain.offer.dto.OfferCacheResponse;
+
+import com.example.joboffers.domain.offer.dto.JobOfferResponse;
 import com.example.joboffers.domain.offer.dto.OfferRequestDto;
 import com.example.joboffers.domain.offer.dto.OfferResponseDto;
 
 public class OfferMapper {
-   static OfferResponseDto mapOfferToOfferDto(Offer offer){
+
+    public static OfferResponseDto mapFromOfferToOfferDto(Offer offer) {
         return OfferResponseDto.builder()
                 .id(offer.id())
-                .company(offer.company())
+                .companyName(offer.companyName())
                 .position(offer.position())
                 .salary(offer.salary())
                 .offerUrl(offer.offerUrl())
                 .build();
     }
 
-   static Offer mapOfferDtoToOffer(OfferRequestDto offerResponseDto){
+    public static Offer mapFromOfferDtoToOffer(OfferRequestDto offerDto) {
         return Offer.builder()
-                .company(offerResponseDto.company())
-                .position(offerResponseDto.position())
-                .salary(offerResponseDto.salary())
-                .offerUrl(offerResponseDto.offerUrl())
+                .companyName(offerDto.companyName())
+                .position(offerDto.position())
+                .salary(offerDto.salary())
+                .offerUrl(offerDto.offerUrl())
                 .build();
     }
 
-    static Offer mapOfferCacheResponseToOffer(OfferCacheResponse offerCacheResponse){
-       return Offer.builder()
-               .company(offerCacheResponse.company())
-               .salary(offerCacheResponse.salary())
-               .offerUrl(offerCacheResponse.offerUrl())
-               .build();
+    public static Offer mapFromJobOfferResponseToOffer(JobOfferResponse jobOfferDto) {
+        return Offer.builder()
+                .offerUrl(jobOfferDto.offerUrl())
+                .salary(jobOfferDto.salary())
+                .position(jobOfferDto.title())
+                .companyName(jobOfferDto.company())
+                .build();
     }
+
 }

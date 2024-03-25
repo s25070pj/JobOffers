@@ -2,20 +2,19 @@ package com.example.joboffers.domain.offer;
 
 import java.util.List;
 import java.util.Optional;
+
+
 public interface OfferRepository {
 
-    Offer saveOffer(Offer offer);
+    boolean existsByOfferUrl(String offerUrl);
 
-    List<Offer> saveAllOffers(List<Offer> offersToSave);
+    Optional<Offer> findByOfferUrl(String offerUrl);
 
-    Optional<Offer> findOfferById(String id);
+    List<Offer> saveAll(List<Offer> offers);
 
-    Optional<Offer> findOfferByUrl(String offerUrl);
+    List<Offer> findAll();
 
-    List<Offer> findAllOffers();
+    Optional<Offer> findById(String id);
 
-    boolean existsById(String id);
-
-    boolean existsByOfferUrl(String url);
-
+    Offer save(Offer offer);
 }

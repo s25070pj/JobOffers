@@ -3,10 +3,11 @@ package com.example.joboffers.domain.offer.dto;
 import lombok.Builder;
 
 @Builder
-public record OfferRequestDto(
-        String companyName,
-        String position,
+public record JobOfferResponse(
+        String title,
+        String company,
         String salary,
         String offerUrl
 ) {
+
 }
