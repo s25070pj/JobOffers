@@ -34,15 +34,15 @@ public class BaseIntegrationTest {
     public static final MongoDBContainer mongoDBcontainer = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
 
     @RegisterExtension
-    public static WireMockExtension wireMockExtension = WireMockExtension.newInstance()
+    public static WireMockExtension wireMockServer = WireMockExtension.newInstance()
             .options(wireMockConfig().dynamicPort())
             .build();
 
     @DynamicPropertySource
     public static void propertyOverride(DynamicPropertyRegistry registry){
         registry.add("spring.data.mongo.uri", mongoDBcontainer::getReplicaSetUrl);
-//        registry.add("offer.http.client.config.uri", () -> WIRE_MOCK_HOST);
-//        registry.add("offer.http.client.config.port", () -> wireMockServer.getPort());
+        registry.add("offer.http.client.config.uri", () -> WIRE_MOCK_HOST);
+        registry.add("offer.http.client.config.port", () -> wireMockServer.getPort());
     }
 
 
